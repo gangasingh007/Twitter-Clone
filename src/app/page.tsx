@@ -1,5 +1,5 @@
 
-function Home() {
+async function Home() {
   return (
     <div className="mt-1">
      This is the home page
