@@ -1,27 +1,21 @@
-import { auth, currentUser } from "@clerk/nextjs/server"
-import UnauthSideBar from "./UnauthSideBar";
-import { getUserByClerkId } from "@/actions/user";
+import { currentUser } from "@clerk/nextjs/server";
 import { Card, CardContent } from "./ui/card";
+import { getUserByClerkId } from "@/actions/user";
 import Link from "next/link";
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import { Separator } from "@/components/ui/separator"
+import { Avatar, AvatarImage } from "./ui/avatar";
+import { Separator } from "./ui/separator";
 import { LinkIcon, MapPinIcon } from "lucide-react";
-
+import UnAuthenticatedSidebar from "./UnauthSideBar";
 
 async function Sidebar() {
-    const authUser = await currentUser();
-    if(!authUser){
-        return (
-            <UnauthSideBar />
-        );
-    }
-    const user = await getUserByClerkId(authUser.id);
-    if (!user) {
-        return null;
-    }
+  const authUser = await currentUser();
+  if (!authUser) return <UnAuthenticatedSidebar />;
 
-    return (
-     <div className="sticky top-20">
+  const user = await getUserByClerkId(authUser.id);
+  if (!user) return null;
+
+  return (
+    <div className="sticky top-20">
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col items-center text-center">
@@ -30,7 +24,7 @@ async function Sidebar() {
               className="flex flex-col items-center justify-center"
             >
               <Avatar className="w-20 h-20 border-2 ">
-                <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpUJhFwB85GyHaxths8hBLh6L9kSmttcgOQ&s" />
+                <AvatarImage src={user.image || "/avatar.png"} />
               </Avatar>
 
               <div className="mt-4 space-y-1">
@@ -77,7 +71,7 @@ async function Sidebar() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;

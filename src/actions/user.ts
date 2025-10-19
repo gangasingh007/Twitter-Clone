@@ -24,6 +24,7 @@ export async function syncUser() {
                 name:`${user.firstName} ${user.lastName}`.trim(),
                 username: user.emailAddresses[0].emailAddress.split("@")[0],
                 email: user.emailAddresses[0].emailAddress,
+                image : user.imageUrl,
             }
         });
         return dbUser;
@@ -63,4 +64,32 @@ export async  function getDbUserId(){
 
     return user.id;
 
+}
+
+export async function geRandomUsers(){
+try {
+    const userId = await getDbUserId();
+
+    const geRandomUsers = await prisma.user.findMany({
+        where:{
+            AND: [
+                {NOT : {followers: {some: {followerId: userId}}}}
+            ]
+        },select:{
+            id: true,
+            name: true,
+            username: true,
+            _count: {
+                select: {
+                    followers: true,
+                },
+            },
+        }
+    }
+);
+    return geRandomUsers;
+} catch (error) {
+    console.log(error);
+    return [];
+}
 }

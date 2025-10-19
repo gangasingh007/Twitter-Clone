@@ -36,7 +36,7 @@ async function DesktopNavbar() {
               <span className="hidden lg:inline">Profile</span>
             </Link>
           </Button>
-          <UserButton />
+            <UserButton />
         </>
       ) : (
         <SignInButton mode="modal">
