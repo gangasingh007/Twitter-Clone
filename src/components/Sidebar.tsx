@@ -30,7 +30,7 @@ async function Sidebar() {
               className="flex flex-col items-center justify-center"
             >
               <Avatar className="w-20 h-20 border-2 ">
-                <AvatarImage src="https://images.unsplash.com/photo-1640951613773-54706e06851d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1160" />
+                <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpUJhFwB85GyHaxths8hBLh6L9kSmttcgOQ&s" />
               </Avatar>
 
               <div className="mt-4 space-y-1">
